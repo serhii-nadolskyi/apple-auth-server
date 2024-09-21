@@ -16,8 +16,7 @@ const logger = winston.createLogger({
     winston.format.json()
   ),
   transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: "combined.log" }),
+    new winston.transports.Console(), // Логируем только в консоль
   ],
 });
 
@@ -34,6 +33,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Apple Auth Server");
 });
 
+// Обработка POST-запроса для маршрута /auth/callback
 app.post("/auth/callback", (req, res) => {
   logger.info("Received request:", { body: req.body });
   const { token } = req.body;
@@ -70,6 +70,13 @@ app.post("/auth/callback", (req, res) => {
   });
 });
 
+// Обработка ошибок (например, если не найден маршрут)
+app.use((req, res, next) => {
+  logger.warn("404 Not Found", { url: req.originalUrl });
+  res.status(404).json({ message: "Not Found" });
+});
+
+// Запуск сервера
 app.listen(PORT, () => {
   logger.info(`Server is running on port ${PORT}`);
 });
