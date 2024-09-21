@@ -20,6 +20,9 @@ const logger = winston.createLogger({
   ],
 });
 
+// Установите dev_mode в true для режима разработки
+const dev_mode = true; // Change this to false in production
+
 app.use(bodyParser.json());
 app.use(morgan('dev')); // Логирование запросов
 
@@ -32,7 +35,18 @@ app.get('/', (req, res) => {
 app.post('/auth/callback', (req, res) => {
   const { token } = req.body;
 
-  // Логика верификации токена
+  if (dev_mode) {
+    // Логика для режима разработки
+    if (token === 'dev') {
+      logger.info('Development mode: token is valid');
+      return res.status(200).json({ message: 'Authenticated in dev mode', user: { sub: 'dev_user' } });
+    } else {
+      logger.error('Development mode: invalid token');
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+  }
+
+  // Логика верификации токена для продакшн-режима
   jwt.verify(token, process.env.APPLE_PUBLIC_KEY, (err, decoded) => {
     if (err) {
       logger.error('Token verification failed:', { error: err });
