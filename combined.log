@@ -1,3 +1,8 @@
 {"level":"info","message":"Server is running on port 3000","timestamp":"2024-09-21T09:44:52.038Z"}
 {"level":"info","message":"Server is running on port 3000","timestamp":"2024-09-21T09:48:33.329Z"}
 {"level":"info","message":"Root path accessed","timestamp":"2024-09-21T09:48:35.131Z"}
+{"level":"info","message":"Server is running on port 3000","timestamp":"2024-09-21T10:29:52.114Z"}
+{"body":{"token":"dev"},"level":"info","message":"Received request:","timestamp":"2024-09-21T10:29:55.519Z"}
+{"level":"info","message":"Development mode: token is valid","timestamp":"2024-09-21T10:29:55.520Z"}
+{"body":{"token":"de"},"level":"info","message":"Received request:","timestamp":"2024-09-21T10:30:02.843Z"}
+{"level":"error","message":"Development mode: invalid token","timestamp":"2024-09-21T10:30:02.844Z"}
