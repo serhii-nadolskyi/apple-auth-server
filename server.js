@@ -16,9 +16,10 @@ app.use(morgan("dev")); // Логирование запросов в консо
 
 // Добавленный маршрут для корневого пути
 app.get("/", (req, res) => {
-  console.info("Root path accessed");
-  res.send("Welcome to the Apple Auth Server");
-});
+    const message = `Welcome to the Apple Auth Server. Unique ID: 1234567. Time: ${new Date().toISOString()}`;
+    console.info(message);
+    res.send(message);
+  });
 
 // Обработка POST-запроса для маршрута /auth/callback
 app.post("/auth/callback", (req, res) => {
