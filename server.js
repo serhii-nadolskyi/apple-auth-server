@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -6,6 +8,9 @@ const winston = require('winston');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const APPLE_KEY_PATH = path.join(__dirname, 'keys', 'AuthKey_6387SY59T6.p8');
+const APPLE_PUBLIC_KEY = fs.readFileSync(APPLE_KEY_PATH, 'utf8');
 
 // Настройка логирования с использованием winston
 const logger = winston.createLogger({
@@ -27,7 +32,7 @@ app.post('/auth/callback', (req, res) => {
   const { token } = req.body;
 
   // Логика верификации токена
-  jwt.verify(token, process.env.APPLE_PUBLIC_KEY, (err, decoded) => {
+  jwt.verify(token, APPLE_PUBLIC_KEY, (err, decoded) => {
     if (err) {
       logger.error('Token verification failed:', { error: err });
       return res.status(401).json({ message: 'Unauthorized' });
