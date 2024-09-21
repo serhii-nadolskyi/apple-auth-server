@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Установите dev_mode в true для режима разработки
-const dev_mode = true; // Change this to false in production
+const dev_mode = false; // Change this to false in production
 
 app.use(cors());
 app.use(bodyParser.json());
