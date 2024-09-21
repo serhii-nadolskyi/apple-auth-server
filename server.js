@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
 const winston = require("winston");
+const cors = require("cors"); // Импортируем cors
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,6 +24,7 @@ const logger = winston.createLogger({
 // Установите dev_mode в true для режима разработки
 const dev_mode = true; // Change this to false in production
 
+app.use(cors()); // Добавляем поддержку CORS
 app.use(bodyParser.json());
 app.use(morgan("dev")); // Логирование запросов
 
